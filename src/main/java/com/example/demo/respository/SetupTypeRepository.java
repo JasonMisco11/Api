@@ -1,11 +1,17 @@
-package com.yourpackage.repository;
+package com.example.demo.respository;
 
-import com.yourpackage.model.SetupType;
+import com.example.demo.entity.SetupType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SetupTypeRepository extends JpaRepository<SetupType, Long> {
-    // You can add custom queries here later if needed
-    // e.g., Optional<SetupType> findByTypeCode(String code);
+
+    List<SetupType> findAll();
+
+
+
+
 }

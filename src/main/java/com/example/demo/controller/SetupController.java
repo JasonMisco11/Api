@@ -1,7 +1,7 @@
-package com.yourpackage.controller;
+package com.example.demo.controller;
 
-import com.yourpackage.model.SetupType;
-import com.yourpackage.repository.SetupTypeRepository;
+import com.example.demo.dto.SetupTypeDTO;
+import com.example.demo.service.serviceImpl.SetupTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,16 +9,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/setups")
-@CrossOrigin(origins = "http://localhost:3000") // Allows React to talk to Java
+@CrossOrigin(origins = "http://localhost:3000")
 public class SetupController {
 
     @Autowired
-    private SetupTypeRepository setupTypeRepository;
+    private SetupTypeServiceImpl setupTypeService;
 
-    // Endpoint for React LOV Dropdown
-    // URL: http://localhost:8080/api/setups/categories
-    @GetMapping("/categories")
-    public List<SetupType> getAllCategories() {
-        return setupTypeRepository.findAll();
+    @GetMapping
+    public List<SetupTypeDTO> getAllCategories() {
+        return setupTypeService.getAll();
+    }
+
+    @PostMapping
+    public SetupTypeDTO createType(@RequestBody SetupTypeDTO dto){
+        return setupTypeService.createSetup(dto);
     }
 }
